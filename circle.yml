@@ -7,4 +7,4 @@ dependencies:
 test:
   override:
     - docker-compose up -d
-    - sudo lxc-attach -n "$(docker inspect --format "{{.Id}}" web)" -- bash -c pwd
+    - sudo lxc-attach -n "$(docker inspect --format "{{.Id}}" web)" -- bash -c sh file.sh

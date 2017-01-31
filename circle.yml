@@ -8,7 +8,7 @@ test:
   override:
     - docker-compose up -d
     - pwd
-    - sudo lxc-attach -n "$(docker inspect --format "{{.Id}}" web)" -- bash -c pwd
+    - sudo lxc-attach -n "$(docker inspect --format "{{.Id}}" web)" -- bash -c "cd /var/www/html"
     - sudo lxc-attach -n "$(docker inspect --format "{{.Id}}" web)" -- bash -c "pwd"
     - sudo lxc-attach -n "$(docker inspect --format "{{.Id}}" web)" -- bash -c "sh ./file.sh"
     - sudo lxc-attach -n "$(docker inspect --format "{{.Id}}" web)" -- bash -c "/bin/bash ./file.sh"

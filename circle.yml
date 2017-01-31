@@ -1,0 +1,9 @@
+machine: 
+  services:
+    - docker
+dependencies:
+  override:
+    - docker-compose up --build
+test:
+  override:
+    - docker-compose up

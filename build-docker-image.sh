@@ -8,7 +8,7 @@ VERSION_TAG="$( sha1sum Dockerfile requirements/*.txt | sha1sum | cut -d' ' -f1 
 echo "Image version: ${VERSION_TAG}"
 echo "Commit SHA1:   ${CIRCLE_SHA1}"
 
-IMAGE_FULL_NAME="myorg/myapp:${VERSION_TAG}"
+IMAGE_FULL_NAME="test_web:${VERSION_TAG}"
 echo "Image name:    ${IMAGE_FULL_NAME}"
 
 echo

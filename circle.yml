@@ -1,4 +1,6 @@
-machine: 
+machine:
+  python:
+    version: 3.5.1
   services:
     - docker
 dependencies:
@@ -14,6 +16,7 @@ dependencies:
   #   - phantomjs -v
   #   - casperjs --version
   override:
+    - ls -al
     - sh build-docker-image.sh
 test:
   override:

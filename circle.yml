@@ -15,7 +15,7 @@ dependencies:
   #   - casperjs --version
   override:
     - pwd
-    - ls ../bin/ci
+    - ls ../bin/
     - ../bin/ci/build-docker-image
     - sh build-docker-image.sh
 test:

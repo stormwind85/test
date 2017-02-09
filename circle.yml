@@ -14,6 +14,8 @@ dependencies:
     - phantomjs -v
     - casperjs --version
   override:
+    - pwd
+    - ls -al
     - ./bin/ci/build-docker-image
     - sh build-docker-image.sh
 test:

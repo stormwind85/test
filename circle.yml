@@ -14,9 +14,8 @@ dependencies:
     - phantomjs -v
     - casperjs --version
   override:
-    - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
-    - docker-compose build
-    - mkdir -p ~/docker; docker save test_web > ~/docker/image.tar
+    - ./bin/ci/build-docker-image
+    - sh build-docker-image.sh
 test:
   override:
     - docker-compose up -d

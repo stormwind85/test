@@ -16,7 +16,7 @@ dependencies:
   override:
     - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
     - docker-compose build
-    - mkdir -p ~/docker; docker save circleci/elasticsearch > ~/docker/image.tar
+    - mkdir -p ~/docker; docker save test_web > ~/docker/image.tar
 test:
   override:
     - docker-compose up -d

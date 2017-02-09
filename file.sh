@@ -1,1 +1,1 @@
-pwd
+casperjs test test.js

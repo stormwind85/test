@@ -2,11 +2,18 @@ version: 2
 jobs:
   build:
     docker:
-      - image: test_web:latest
       - image: python:3.5.1
     working_directory: ~/test
     steps:
       - run: echo "hello world"
+      - run:
+        name: Test command
+        command: |
+        pwd
+        ls -al
+      - run:
+        name: new test
+        command: echo "ok"
       # - save_cache:
       #   key: dependency-cache-{{ checksum "Gemfile.lock" }}
       #   paths:

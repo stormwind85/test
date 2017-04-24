@@ -18,10 +18,10 @@ dependencies:
   override:
     - pwd
     # - if [ -e ~/docker/image.tar ]; then docker load -i ~/docker/image.tar; docker-compose up -d; else docker-compose up -d --build; mkdir -p ~/docker; docker save test_web > ~/docker/image.tar; fi
-    - if [ -e ~/docker/image.tar ]; then docker load -i ~/docker/image.tar; fi
+    - if [ -e ~/docker/image.tar ]; then docker load -i ~/docker/image.tar; touch ok.txt fi
     - docker build -rm=false -t test_web .
     - mkdir -p ~/docker; docker save test_web > ~/docker/image.tar
-    - ls -al
+    - ls -al ~
     
 
 

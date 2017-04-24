@@ -9,8 +9,8 @@ jobs:
       - run:
         name: Test command
         command: |
-        pwd
-        ls -al
+          pwd
+          ls -al
       - run:
         name: new test
         command: echo "ok"

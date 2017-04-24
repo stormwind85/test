@@ -1,0 +1,37 @@
+machine:
+  python:
+    version: 3.5
+  services:
+    - docker
+dependencies:
+  cache_directories:
+    - "~/docker"
+  # pre:
+  #   - wget https://github.com/Medium/phantomjs/releases/download/v2.1.1/phantomjs-2.1.1-linux-x86_64.tar.bz2
+  #   - sudo tar xvjf phantomjs-2.1.1-linux-x86_64.tar.bz2
+  #   - sudo mv phantomjs-2.1.1-linux-x86_64 /home/ubuntu/bin/
+  #   - sudo chmod a+x /home/ubuntu/bin/phantomjs-2.1.1-linux-x86_64
+  #   - sudo ln -s --force /home/ubuntu/bin/phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs
+  #   - npm install -g casperjs@1.1.3
+  #   - phantomjs -v
+  #   - casperjs --version
+  override:
+    - pwd
+    # - if [ -e ~/docker/image.tar ]; then docker load -i ~/docker/image.tar; docker-compose up -d; else docker-compose up -d --build; mkdir -p ~/docker; docker save test_web > ~/docker/image.tar; fi
+    - if [ -e ~/docker/image.tar ]; then docker load -i ~/docker/image.tar; touch ok.txt; fi
+    - ls
+    - docker build -t $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+    - mkdir -p ~/docker; docker save $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME > ~/docker/image.tar
+    - ls -al ~/docker
+    
+
+
+    # - pwd
+    # - if [ -f ~/docker/image.tar ]; then touch newFile.txt; fi
+    # - if [ -f /docker/image.tar ]; then touch newFile2.txt; else mkdir newFolder; fi
+    # - ls
+
+
+
+  #  - sh build-docker-image.sh
+  #  - sh file.sh

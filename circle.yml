@@ -11,4 +11,5 @@ jobs:
         paths:
           - ~/docker
       - run:
+        name: Test Command
         command: pwd

@@ -21,8 +21,9 @@ dependencies:
     # - ls -al
     # - if [[ -d ~/docker ]]; then ls ~/docker; fi
     - pwd
-    - if [ -f ~/docker/image.tar ]; then ls; fi
-    - if [ -f /docker/image.tar ]; then ls; else; ls -al; fi
+    - if [ -f ~/docker/image.tar ]; then touch newFile.txt; fi
+    - if [ -f /docker/image.tar ]; then touch newFile2.txt; else mkdir newFolder; fi
+    - ls
 
 
 

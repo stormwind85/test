@@ -7,13 +7,13 @@ jobs:
     steps:
       - run: echo "hello world"
       - run:
-        name: Test command
-        command: |
-          pwd
-          ls -al
+          name: Test command
+          command: |
+            pwd
+            ls -al
       - run:
-        name: new test
-        command: echo "ok"
+          name: new test
+          command: echo "ok"
       # - save_cache:
       #   key: dependency-cache-{{ checksum "Gemfile.lock" }}
       #   paths:

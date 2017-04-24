@@ -5,16 +5,14 @@ jobs:
       - image: python:3.5.1
     working_directory: ~/test
     steps:
-      - run: echo "hello world"
+      - restor_cache:
+          key: projectname-master
       - run:
           name: Test command
           command: |
             pwd
-            ls -al
-      - run:
-          name: new test
-          command: echo "ok"
+            docker build -t $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
       - save_cache:
-          key: dependency-cache-{{ checksum "Gemfile.lock" }}
+          key: dependency-cache
           paths:
             - ~/docker

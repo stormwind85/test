@@ -16,11 +16,9 @@ dependencies:
   #   - phantomjs -v
   #   - casperjs --version
   override:
-    - ls -al
-    - sh build-docker-image.sh
-test:
-  override:
-    - docker-compose up -d
+    - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; docker-compose up else docker-compose up -d --build; mkdir -p ~/docker; docker save circleci/test > ~/docker/image.tar; fi
     - pwd
     - ls -al
-    - sh file.sh
+    - if [[ -d ~/docker ]]; then ls ~/docker
+  #  - sh build-docker-image.sh
+  #  - sh file.sh

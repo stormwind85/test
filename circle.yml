@@ -6,10 +6,8 @@ jobs:
       - image: python:3.5.1
     working_directory: ~/test
     steps:
+      - run: echo "hello world"
       - save_cache:
         key: dependency-cache-{{ checksum "Gemfile.lock" }}
         paths:
           - ~/docker
-      - run:
-        name: Test Command
-        command: pwd

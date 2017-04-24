@@ -5,7 +5,7 @@ jobs:
       - image: python:3.5.1
     working_directory: ~/test
     steps:
-      - restor_cache:
+      - restore_cache:
           key: projectname-master
       - run:
           name: Test command

@@ -7,7 +7,7 @@ jobs:
     working_directory: ~/test
     steps:
       - run: echo "hello world"
-      - save_cache:
-        key: dependency-cache-{{ checksum "Gemfile.lock" }}
-        paths:
-          - ~/docker
+      # - save_cache:
+      #   key: dependency-cache-{{ checksum "Gemfile.lock" }}
+      #   paths:
+      #     - ~/docker

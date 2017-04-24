@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: test_web:latest
       - image: python:3.5.1
-    working_directory: ~
+    working_directory: ~/test
     steps:
       - save_cache:
         key: dependency-cache-{{ checksum "Gemfile.lock" }}

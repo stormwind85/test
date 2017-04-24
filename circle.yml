@@ -5,6 +5,9 @@ jobs:
       - image: python:3.5.1
     working_directory: ~/test
     steps:
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
       - restore_cache:
           key: projectname-master
       - run:

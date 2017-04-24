@@ -14,7 +14,7 @@ jobs:
       - run:
           name: new test
           command: echo "ok"
-      # - save_cache:
-      #   key: dependency-cache-{{ checksum "Gemfile.lock" }}
-      #   paths:
-      #     - ~/docker
+      - save_cache:
+          key: dependency-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ~/docker

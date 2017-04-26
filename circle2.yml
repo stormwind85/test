@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: python:3.5.1
+    working_directory: ~/test
+    steps:
+      - setup_remote_docker:
+          reusable: true
+          exclusive: true
+      - restore_cache:
+          key: projectname-master
+      - run:
+          name: Test command
+          command: |
+            pwd
+            docker build -t $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - save_cache:
+          key: dependency-cache
+          paths:
+            - ~/docker

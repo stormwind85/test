@@ -16,11 +16,12 @@ dependencies:
   #   - phantomjs -v
   #   - casperjs --version
   override:
-    - mkdir test
+    - mkdir ./test
     - mkdir $CIRCLE_ARTIFACTS/test
-    - if [ "$(ls -A ./test/)" ]; then cp ./test/* $CIRCLE_ARTIFACTS/test; fi
-    - touch test/ok.txt
-    - if [ "$(ls -A ./test/)" ]; then cp ./test/* $CIRCLE_ARTIFACTS/test; fi
+    - if [ $(ls -A ./test/) ]; then echo ok; else echo nok; fi
+    - if [ $(ls -A ./test/) ]; then cp ./test/* $CIRCLE_ARTIFACTS/test; fi
+    - touch ./test/ok.txt
+    - if [ $(ls -A ./test/) ]; then cp ./test/* $CIRCLE_ARTIFACTS/test; fi
     # - if [ -e ~/docker/image.tar ]; then docker load -i ~/docker/image.tar; docker-compose up -d; else docker-compose up -d --build; mkdir -p ~/docker; docker save test_web > ~/docker/image.tar; fi
     # - if [ -e ~/docker/image.tar ]; then docker load -i ~/docker/image.tar; touch ok.txt; fi
     # - ls

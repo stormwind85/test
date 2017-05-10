@@ -4,7 +4,7 @@ node("master") {
     }
 
     stage('Docker test') {
-	    dockerNode(image: 'test_web', sideContainers: ['smtp-hipay-mg-latest']) {
+	    dockerNode(image: 'test_web', sideContainers: ['test_web']) {
 			echo 'bien'
 			pwd()
 			sh 'ls -al'

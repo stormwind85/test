@@ -1,6 +1,6 @@
 FROM php:5.6-apache
 
-RUN apt-get install -y python
+RUN apt-get install -y python3
 
 WORKDIR /var/www/html
 

@@ -7,6 +7,7 @@ node("master") {
 	    dockerNode(image: 'test_web', sideContainers: ['test_web']) {
 			echo 'bien'
 			pwd()
+			sh 'pwd'
 			sh 'ls -al'
 		}
     }

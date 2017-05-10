@@ -1,4 +1,3 @@
 web:
   build: . 
-  image: test_web2
   container_name: web

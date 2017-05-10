@@ -1,3 +1,4 @@
-web:
+webMaster:
   build: .
+  image: test_web
   container_name: webMaster

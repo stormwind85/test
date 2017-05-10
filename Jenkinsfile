@@ -4,7 +4,7 @@ node("master") {
     }
 
     stage('Docker test') {
-	    dockerNode(image: 'test_web', sideContainers: ['']) {
+	    dockerNode(image: 'test_web', sideContainers: ['test1']) {
 			echo 'bien'
 		}
     }

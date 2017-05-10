@@ -5,7 +5,7 @@ node("master") {
     
     stage 'Docker test' {
         withDockerContainer('test_web') {
-            // some block
+            echo 'bien'
         }
     }
 }

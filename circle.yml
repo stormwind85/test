@@ -1,8 +1,8 @@
 machine:
   python:
     version: 3.5.1
-  services:
-    - docker
+  # services:
+  #   - docker
 dependencies:
   pre:
     - sudo apt-get install sshpass

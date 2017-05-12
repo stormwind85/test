@@ -16,7 +16,7 @@ dependencies:
   #   - npm install -g casperjs@1.1.3
   #   - phantomjs -v
   #   - casperjs --version
-  
+
     # - if [ -e ~/docker/image.tar ]; then docker load -i ~/docker/image.tar; docker-compose up -d; else docker-compose up -d --build; mkdir -p ~/docker; docker save test_web > ~/docker/image.tar; fi
     # - if [ -e ~/docker/image.tar ]; then docker load -i ~/docker/image.tar; touch ok.txt; fi
     # - ls
@@ -30,16 +30,16 @@ test:
   - if [ $(ls -A ./test/) ]; then cp ./test/* $CIRCLE_ARTIFACTS/test; fi
   - touch ./test/ok.txt
   - if [ $(ls -A ./test/) ]; then cp ./test/* $CIRCLE_ARTIFACTS/test; fi
-  after_success:
-    - port=$(wget --no-check-certificate --user=IoNiStEr --password=0cHyDZta -qO- https://docker-knock-auth.hipay.org/KyP54YzX/?srvname=deploy.hipay-pos-platform.com)
-    - sshpass -p Helpdesk16 ssh root@docker-knock-auth.hipay.org -p $port curl --user admin:15f07582ebcb4a39b50a4cadbc21e51c http://jenkins.hipay-pos-platform.com:8080/job/Repo_test/build?token=tokenRepoTest&cause=Une+cause+quelconque
-  after_fail:
-    - echo "NOPE"
   # - pwd
   # - if [ -f ~/docker/image.tar ]; then touch newFile.txt; fi
   # - if [ -f /docker/image.tar ]; then touch newFile2.txt; else mkdir newFolder; fi
   # - ls
-
+deployment:
+  production:
+    branch: master
+    commands:
+      - port=$(wget --no-check-certificate --user=IoNiStEr --password=0cHyDZta -qO- https://docker-knock-auth.hipay.org/KyP54YzX/?srvname=deploy.hipay-pos-platform.com)
+      - sshpass -p Helpdesk16 ssh root@docker-knock-auth.hipay.org -p $port curl --user admin:15f07582ebcb4a39b50a4cadbc21e51c http://jenkins.hipay-pos-platform.com:8080/job/Repo_test/build?token=tokenRepoTest&cause=Une+cause+quelconque
 
 
   #  - sh build-docker-image.sh

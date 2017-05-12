@@ -7,4 +7,4 @@ port=$(wget --no-check-certificate --user=$user --password=$password -qO- https:
 
 echo $port
 
-sshpass -p $passwordContainer ssh root@docker-knock-auth.hipay.org -p $port curl --user admin:$passwordJenkins http://jenkins.hipay-pos-platform.com:8080/job/Repo_test/build?token=tokenRepoTest&cause=Une+cause+quelconque
+sshpass -p $passwordContainer ssh root@docker-knock-auth.hipay.org -p $port curl --user admin:$passwordJenkins -s http://jenkins.hipay-pos-platform.com:8080/job/Repo_test/build?token=tokenRepoTest&cause=Une+cause+quelconque

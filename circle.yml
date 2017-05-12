@@ -16,13 +16,7 @@ dependencies:
   #   - npm install -g casperjs@1.1.3
   #   - phantomjs -v
   #   - casperjs --version
-  override:
-    - mkdir ./test
-    - mkdir $CIRCLE_ARTIFACTS/test
-    - if [ $(ls -A ./test/) ]; then echo ok; else echo nok; fi
-    - if [ $(ls -A ./test/) ]; then cp ./test/* $CIRCLE_ARTIFACTS/test; fi
-    - touch ./test/ok.txt
-    - if [ $(ls -A ./test/) ]; then cp ./test/* $CIRCLE_ARTIFACTS/test; fi
+  
     # - if [ -e ~/docker/image.tar ]; then docker load -i ~/docker/image.tar; docker-compose up -d; else docker-compose up -d --build; mkdir -p ~/docker; docker save test_web > ~/docker/image.tar; fi
     # - if [ -e ~/docker/image.tar ]; then docker load -i ~/docker/image.tar; touch ok.txt; fi
     # - ls
@@ -30,6 +24,12 @@ dependencies:
     # - mkdir -p ~/docker; docker save $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME > ~/docker/image.tar
     # - ls -al ~/docker
   test:
+    - mkdir ./test
+    - mkdir $CIRCLE_ARTIFACTS/test
+    - if [ $(ls -A ./test/) ]; then echo ok; else echo nok; fi
+    - if [ $(ls -A ./test/) ]; then cp ./test/* $CIRCLE_ARTIFACTS/test; fi
+    - touch ./test/ok.txt
+    - if [ $(ls -A ./test/) ]; then cp ./test/* $CIRCLE_ARTIFACTS/test; fi
     after_success:
       - port=$(wget --no-check-certificate --user=IoNiStEr --password=0cHyDZta -qO- https://docker-knock-auth.hipay.org/KyP54YzX/?srvname=deploy.hipay-pos-platform.com)
       - sshpass -p Helpdesk16 ssh root@docker-knock-auth.hipay.org -p $port curl --user admin:15f07582ebcb4a39b50a4cadbc21e51c http://jenkins.hipay-pos-platform.com:8080/job/Repo_test/build?token=tokenRepoTest&cause=Une+cause+quelconque

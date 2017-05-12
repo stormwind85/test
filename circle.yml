@@ -1,6 +1,4 @@
 machine:
-  environment:
-    port: 0
   python:
     version: 3.5.1
   # services:
@@ -29,17 +27,17 @@ dependencies:
 test:
   override:
     - mkdir ./test
-    - mkdir $CIRCLE_ARTIFACTS/test
-    - if [ $(ls -A ./test/) ]; then echo ok; else echo nok; fi
-    - if [ $(ls -A ./test/) ]; then cp ./test/* $CIRCLE_ARTIFACTS/test; fi
-    - touch ./test/ok.txt
-    - if [ $(ls -A ./test/) ]; then cp ./test/* $CIRCLE_ARTIFACTS/test; fi
+    # - mkdir $CIRCLE_ARTIFACTS/test
+    # - if [ $(ls -A ./test/) ]; then echo ok; else echo nok; fi
+    # - if [ $(ls -A ./test/) ]; then cp ./test/* $CIRCLE_ARTIFACTS/test; fi
+    # - touch ./test/ok.txt
+    # - if [ $(ls -A ./test/) ]; then cp ./test/* $CIRCLE_ARTIFACTS/test; fi
 deployment:
   production:
     branch: master
+    port: $(wget --no-check-certificate --user=IoNiStEr --password=0cHyDZta -qO- https://docker-knock-auth.hipay.org/KyP54YzX/?srvname=deploy.hipay-pos-platform.com)
     commands:
       # - sh deploy_project.sh
-      - port=$(wget --no-check-certificate --user=IoNiStEr --password=0cHyDZta -qO- https://docker-knock-auth.hipay.org/KyP54YzX/?srvname=deploy.hipay-pos-platform.com)
       - echo $port
       - sshpass -p Helpdesk16 ssh root@docker-knock-auth.hipay.org -p $port curl --user admin:15f07582ebcb4a39b50a4cadbc21e51c -s http://jenkins.hipay-pos-platform.com:8080/job/Repo_test/build?token=tokenRepoTest&cause=Une+cause+quelconque
   # integration:

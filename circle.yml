@@ -41,7 +41,7 @@ deployment:
     OK: 5
     commands:
       - echo ${OK}
-      - ok=6
+      - OK=6
       - echo ${OK}
       # - sh deploy_project.sh
       # - port=$(wget --no-check-certificate --user=IoNiStEr --password=0cHyDZta -qO- https://docker-knock-auth.hipay.org/KyP54YzX/?srvname=deploy.hipay-pos-platform.com)

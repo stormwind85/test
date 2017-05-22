@@ -5,9 +5,6 @@ machine:
   #   - docker
 dependencies:
   pre:
-    - echo ${USER}
-    - echo $USER
-    - echo $TOKEN
     - sudo apt-get install sshpass
   # cache_directories:
   #   - "~/docker"

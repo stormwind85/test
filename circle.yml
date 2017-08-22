@@ -15,6 +15,7 @@ jobs:
           name: Test command
           command: |
             pwd
+            ls -al
             docker build -t $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
       - save_cache:
           key: dependency-cache

@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: docker:17.05.0-ce-git
       - image: python:3.5.1
+    working_directory: ~/test
     steps:
       - setup_remote_docker:
           reusable: true
@@ -13,6 +14,7 @@ jobs:
       - run:
           name: Test command
           command: |
+            find / -type f -name Dockerfile
             pwd
             ls -al
             docker build -t $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .

@@ -5,7 +5,11 @@ git status
 if [ "$defaultMessage" != "" ]; then
 	read -p "Please, write your commit message. Default [$(echo $defaultMessage)] " message
 	message=${message:-$defaultMessage}
-	git commit -am "$(echo $message)"
+	if [ "$message" = "$defaultMessage" ]; then
+		git commit -am "$(echo $message)"
+	else
+		git commit -am "Test :$message"
+	fi
 else
 	while [ "$message" = "" ]; do
 		read -r -p "Please, write your commit message. Default [$(echo $defaultMessage)] " message

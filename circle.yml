@@ -5,6 +5,7 @@ jobs:
       - image: golang:1.6.4
     working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-docker
     steps:
+      - checkout
       - run:
           name: Test command
           command: |

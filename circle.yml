@@ -147,17 +147,20 @@ jobs:
         command: |
           cp bin/tests/report-php5-6.html $CIRCLE_ARTIFACTS/casper_report/
           cp bin/tests/report-php7-0.html $CIRCLE_ARTIFACTS/casper_report/
+  deploy:
+    name: Push module Magento1 to Docker-Machine
+    command: |
+      if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+        sh ./bin/deployment/deploy_staging.sh
+      fi
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+        requires:
+          - build
       - deploy:
-        name: Push module Magento1 to Docker-Machine
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "develop" ]; then
-            sh ./bin/deployment/deploy_staging.sh
-          fi
-# workflows:
-#   version: 2
-#   build_and_test:
-#     jobs:
-#       - build
-#       - test:
-#         requires:
-#           - build
+        requires:
+          - test

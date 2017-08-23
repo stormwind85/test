@@ -153,11 +153,11 @@ jobs:
           if [ "${CIRCLE_BRANCH}" == "develop" ]; then
             sh ./bin/deployment/deploy_staging.sh
           fi
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test:
-        requires:
-          - build
+# workflows:
+#   version: 2
+#   build_and_test:
+#     jobs:
+#       - build
+#       - test:
+#         requires:
+#           - build

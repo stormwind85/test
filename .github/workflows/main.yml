@@ -14,6 +14,32 @@ jobs:
       - env:
           EVENT_CONTEXT: ${{ toJSON(github.event) }}
         run: |
-          JSON='{ "project": "My Project", "version": "${{ github.event.release.tag_name }}", "release_link": "${{ github.event.release.html_url }}", "changelog": "${{ steps.convert.outputs.text }}" }'
-          echo "$JSON"
-          curl -X POST --data-binary "$JSON" -H "Content-Type: application/json" ${{ vars.SLACK_WEBHOOK_URL }}
+          node <<EOF
+          const payload = {
+            project: "My Project",
+            version: "${{ github.event.release.tag_name }}",
+            release_link: "${{ github.event.release.html_url }}",
+            changelog: `${{ steps.convert.outputs.text }}`
+          };
+
+          console.log("payload", payload);
+
+          fetch(${{ vars.SLACK_WEBHOOK_URL }}, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+          })
+          .then(response => {
+            if (!response.ok) {
+              return response.json().then(err => {
+                throw new Error(`Failed to send message: ${err}`);
+              });
+            }
+            console.log("Message sent successfully !");
+          })
+          .catch(error => {
+            console.error("Request error", error.message);
+          });
+          EOF

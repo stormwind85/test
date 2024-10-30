@@ -1,0 +1,18 @@
+on:
+  release:
+    types: [published]
+
+jobs:
+  slack_message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack Markdown Converter
+        id: convert
+        uses: LoveToKnow/slackify-markdown-action@v1.1.1
+        with:
+          text: ${{ github.event.release.body }}
+      - env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: |
+          JSON='{ "project": "My Project", "version": "${{ github.event.release.tag_name }}", "release_link": "${{ github.event.release.html_url }}", "changelog": "${{ steps.convert.outputs.text }}" }'
+          echo "$JSON"

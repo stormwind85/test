@@ -89,7 +89,7 @@ jobs:
                   "elements": [
                     {
                       "type": "link",
-                      "url": "https://${{ vars.JIRA_DOMAIN }}/browse/" + ticket
+                      "url": "https://${{ vars.JIRA_DOMAIN }}/browse/" + ticket,
                       "text": ticket
                     }
                   ]

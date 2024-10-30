@@ -13,15 +13,14 @@ jobs:
           text: ${{ github.event.release.body }}
       - env:
           EVENT_CONTEXT: ${{ toJSON(github.event) }}
+          CONVERTED_TEXT: ${{ toJSON(steps.convert.outputs.text) }}
         run: |
-          node <<EOF
-          console.log(${{ steps.convert.outputs.text }});
-          
+          node <<EOF          
           const payload = {
             project: "My Project",
             version: "${{ github.event.release.tag_name }}",
             release_link: "${{ github.event.release.html_url }}",
-            changelog: ${{ toJSON(steps.convert.outputs.text) }}
+            changelog: process.env.CONVERTED_TEXT
           };
           payload.changelog = payload.changelog.replace(/\n$/, '');
 

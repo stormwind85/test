@@ -16,3 +16,4 @@ jobs:
         run: |
           JSON='{ "project": "My Project", "version": "${{ github.event.release.tag_name }}", "release_link": "${{ github.event.release.html_url }}", "changelog": "${{ steps.convert.outputs.text }}" }'
           echo "$JSON"
+          curl -X POST --data-binary "$JSON" -H "Content-Type: application/json" ${{ vars.SLACK_WEBHOOK_URL }}

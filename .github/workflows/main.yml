@@ -21,10 +21,11 @@ jobs:
             release_link: "${{ github.event.release.html_url }}",
             changelog: ${{ toJSON(steps.convert.outputs.text) }}
           };
+          payload.changelog = payload.changelog.replace(/\n$/, '');
 
           console.log("payload", payload);
 
-          fetch(${{ vars.SLACK_WEBHOOK_URL }}, {
+          fetch("${{ vars.SLACK_WEBHOOK_URL }}", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"

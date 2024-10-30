@@ -21,9 +21,9 @@ jobs:
             blocks: [
               {
                 "type": "section",
-          			"text": {
-          				"type": "mrkdwn",
-          				"text": "*[NEW]* My Project - ${{ github.event.release.tag_name }}",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*[NEW]* My Project - ${{ github.event.release.tag_name }}",
                 },
                 "accessory": {
                   "type": "button",
@@ -36,19 +36,19 @@ jobs:
                 }
               },
               {
-          			"type": "section",
-          			"text": {
-          				"type": "mrkdwn",
-          				"text": ":clipboard: tickets JIRA :"
-          			}
-          		},
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":clipboard: tickets JIRA :"
+                }
+              },
               {
-          			"type": "section",
-          			"text": {
-          				"type": "mrkdwn",
-          				"text": process.env.CONVERTED_TEXT.replace(/\n$/, '')
-          			}
-          		}
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": process.env.CONVERTED_TEXT.replace(/\n$/, '')
+                }
+              }
             ]
           };
 

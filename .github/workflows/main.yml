@@ -15,20 +15,49 @@ jobs:
           EVENT_CONTEXT: ${{ toJSON(github.event) }}
           CONVERTED_TEXT: ${{ steps.convert.outputs.text }}
         run: |
-          node <<EOF          
+          node <<EOF
           const payload = {
-            project: "My Project",
-            version: "${{ github.event.release.tag_name }}",
-            release_link: "${{ github.event.release.html_url }}",
-            changelog: process.env.CONVERTED_TEXT
+            channel: "${{ vars.SLACK_CHANNEL_ID }}",
+            blocks: [
+              {
+                "type": "section",
+          			"text": {
+          				"type": "mrkdwn",
+          				"text": "*[NEW]* My Project - ${{ github.event.release.tag_name }}",
+                },
+                "accessory": {
+                  "type": "button",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Show release :rocket:",
+                    "emoji": true
+                  },
+                  "url": "${{ github.event.release.html_url }}"
+                }
+              },
+              {
+          			"type": "section",
+          			"text": {
+          				"type": "mrkdwn",
+          				"text": ":clipboard: tickets JIRA :"
+          			}
+          		},
+              {
+          			"type": "section",
+          			"text": {
+          				"type": "mrkdwn",
+          				"text": process.env.CONVERTED_TEXT.replace(/\n$/, '')
+          			}
+          		}
+            ]
           };
-          payload.changelog = payload.changelog.replace(/\n$/, '');
 
           console.log("payload", payload);
 
-          fetch("${{ vars.SLACK_WEBHOOK_URL }}", {
+          fetch("https://slack.com/api/chat.postMessage", {
             method: "POST",
             headers: {
+              "Authorization": "Bearer ${{ secrets.SLACK_API_TOKEN }}",
               "Content-Type": "application/json"
             },
             body: JSON.stringify(payload)

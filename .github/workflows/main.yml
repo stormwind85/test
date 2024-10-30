@@ -13,7 +13,7 @@ jobs:
           text: ${{ github.event.release.body }}
       - env:
           EVENT_CONTEXT: ${{ toJSON(github.event) }}
-          CONVERTED_TEXT: ${{ toJSON(steps.convert.outputs.text) }}
+          CONVERTED_TEXT: ${{ steps.convert.outputs.text }}
         run: |
           node <<EOF          
           const payload = {

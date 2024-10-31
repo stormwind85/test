@@ -74,6 +74,7 @@ jobs:
             console.log("payload", payload);
 
             tickets.forEach((ticket) => {
+              ticket = ticket.toUpperCase();
               payload.blocks[2].elements[0].elements.push({
                 "type": "rich_text_section",
                 "elements": [

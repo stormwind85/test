@@ -13,11 +13,12 @@ jobs:
         uses: dawidd6/action-download-artifact@v6
         with:
           name: gitlab-data-artifact
-          github_token: ${{ secrets.GH_PAT }}
+          github_token: ${{ github.token }}
           workflow: info-release.yml
       - name: Display artifact content
         run: cat artifact.json
       - name: Slack Markdown Converter
+        if: github.event.release.body
         id: convert
         uses: LoveToKnow/slackify-markdown-action@v1.1.1
         with:

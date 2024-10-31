@@ -3,35 +3,18 @@ name: Automated Slack message
 on:
   release:
     types: [published]
-  repository_dispatch:
-    types: [trigger-artifact-workflow]
 
 jobs:
-  store_artifacts:
-    name: Store artifacts
-    runs-on: ubuntu-latest
-    if: github.event_name == 'repository_dispatch' && github.event.action == 'trigger-artifact-workflow'
-    steps:
-      - name: Access data from GitLab payload
-        run: |
-          echo '${{ toJSON(github.event) }}'
-          echo '${{ toJSON(github.event.client_payload) }}' > artifact.json
-          cat artifact.json
-      - name: Upload JSON as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: gitlab-data-artifact
-          path: artifact.json
   slack_message:
     name: Slack message
     runs-on: ubuntu-latest
-    if: github.event_name == 'release' && github.event.action == 'published'
     steps:
       - name: Download release artifact
         uses: actions/download-artifact@v4
         with:
           name: gitlab-data-artifact
           github-token: ${{ secrets.GH_PAT }}
+          run-id: info-release.yml
       - name: Display artifact content
         run: cat artifact.json
       - name: Slack Markdown Converter

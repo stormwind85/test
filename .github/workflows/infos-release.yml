@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Access data from GitLab payload
         run: |
-          echo "${{ toJSON(github.event.client_payload) }}" > artifact.json
+          echo '${{ toJSON(github.event.client_payload) }}' > artifact.json
           cat artifact.json
       - name: Upload JSON as artifact
         uses: actions/upload-artifact@v4

@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download release artifact
-        uses: actions/download-artifact@v4
+        uses: dawidd6/action-download-artifact@v6
         with:
           name: gitlab-data-artifact
-          github-token: ${{ secrets.GH_PAT }}
-          run-id: info-release.yml
+          github_token: ${{ secrets.GH_PAT }}
+          workflow: info-release.yml
       - name: Display artifact content
         run: cat artifact.json
       - name: Slack Markdown Converter

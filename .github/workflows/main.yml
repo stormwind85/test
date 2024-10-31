@@ -22,7 +22,6 @@ jobs:
           path: artifact.json
   slack_message:
     runs-on: ubuntu-latest
-    needs: store_artifacts
     if: github.event_name == 'release' && github.event.action == 'published'
     steps:
       - name: Download release artifact

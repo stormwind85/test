@@ -22,19 +22,6 @@ try {
     });
 
     console.log("tickets", tickets);
-
-    tickets.forEach((ticket) => {
-      payload.blocks[2].elements[0].elements.push({
-        "type": "rich_text_section",
-        "elements": [
-          {
-            "type": "link",
-            "url": "https://${{ vars.JIRA_DOMAIN }}/browse/" + ticket,
-            "text": ticket
-          }
-        ]
-      });
-    });
 } catch (error) {
     console.error("Request error", error.message);
 }
